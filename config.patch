@@ -1,0 +1,24 @@
+diff --git a/lib/Makefile b/lib/Makefile
+index 870301c..1428c38 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -1,5 +1,5 @@
+ libcyusb.so.1: libcyusb.cpp
+-	g++ -fPIC -o libcyusb.o -c libcyusb.cpp
++	g++ -DGLOBAL_CONFIG_PATH=\"$(GLOBAL_CONFIG_PATH)\" -fPIC -o libcyusb.o -c libcyusb.cpp
+ 	g++ -shared -Wl,-soname,libcyusb.so -o libcyusb.so.1 libcyusb.o -l usb-1.0 -l rt
+ 	ln -sf libcyusb.so.1 libcyusb.so
+ 	rm -f libcyusb.o
+diff --git a/lib/libcyusb.cpp b/lib/libcyusb.cpp
+index de25316..4d59ce5 100644
+--- a/lib/libcyusb.cpp
++++ b/lib/libcyusb.cpp
+@@ -231,7 +231,7 @@ renumerate (
+ int cyusb_open( void ) {
+ 	int fd1 = -1;
+ 	int r;
+-	char global_config_path[] = "/etc/cyusb.conf";
++	char global_config_path[] = GLOBAL_CONFIG_PATH;
+ 	char user_config_path[ MAX_FILEPATH_LENGTH ] = "";
+ 	char *path = getenv( "HOME" );
+ 	if ( path ) {

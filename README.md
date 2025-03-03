@@ -4,6 +4,12 @@
                        Updated by Ho-Ro to use Qt5
                    ====================================
 
+Building with Nix (CLI tools only):
+-----------------------------------
+
+1. Run `nix-build`
+2. Use the binaries in `result/bin/` (e.g. `result/bin/download_fx3 -t RAM -i firmware.img`)
+
 Pre-requisites:
 ---------------
 
